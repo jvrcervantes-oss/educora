@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confirmar asistencia — Eduardo &amp; Cora</title>
+<meta name="description" content="Confirma tu asistencia a la boda de Eduardo y Cora, el 1 de mayo de 2027.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="confirmar-asistencia.html">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="deco-flourish" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3c-4.5 4-4.5 10.5 0 15 4.5-4.5 4.5-11 0-15z"/><path d="M12 21V9"/></svg></div>
+  <h1 class="couple-names" style="font-size:var(--t-script-name);font-family:var(--script);color:var(--name-color);border:0;text-align:center;margin:-2.6rem 0 0;">Eduardo &amp; Cora</h1>
+</header>
+
+<nav class="site-nav" aria-label="Navegación principal">
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="confirmar-asistencia.html" aria-current="page">Confirmar asistencia</a></li>
+    <li><a href="informacion.html">Información</a></li>
+    <li><a href="hoteles.html">Hoteles</a></li>
+    <li><a href="transporte.html">Transporte</a></li>
+    <li><a href="lista-de-bodas.html">Lista de bodas</a></li>
+    <li><a href="musica.html">Música</a></li>
+    <li><a href="dress-code.html">Dress code</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="wrap">
+    <section class="section rv">
+      <h1>Confirma tu asistencia</h1>
+      <hr class="divider">
+      <p class="lede">Podéis utilizar este formulario para confirmar vuestra asistencia a la boda. Si confirmáis para varios invitados, indicad los nombres de todos los que asistirán. No hay fecha límite, pero cuanto antes confirméis, antes podremos organizarlo todo.</p>
+
+      <form id="rsvpForm" class="stack" novalidate>
+        <input type="text" name="web" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+
+        <div class="field">
+          <label for="rsvpNombre">Tu nombre</label>
+          <input type="text" id="rsvpNombre" name="nombre" required>
+        </div>
+
+        <div class="field">
+          <label for="rsvpAcompanantes">Nombres de tus acompañantes (si vienes con más gente)</label>
+          <textarea id="rsvpAcompanantes" name="acompanantes" placeholder="Uno por línea"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="check-group" style="text-transform:none;font-weight:400;">
+            <input type="checkbox" id="rsvpConsentAcomp" name="consiente_acompanantes" value="si">
+            Declaro que cuento con el consentimiento de mis acompañantes para compartir sus datos, incluida su alergia o intolerancia.
+          </label>
+        </div>
+
+        <div class="field">
+          <label>¿A qué asistes?</label>
+          <div class="check-group">
+            <label><input type="checkbox" name="asiste_ceremonia" value="si" checked> Ceremonia</label>
+            <label><input type="checkbox" name="asiste_banquete" value="si" checked> Banquete</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Menú</label>
+          <div class="radio-group">
+            <label><input type="radio" name="menu" value="normal" checked> Normal</label>
+            <label><input type="radio" name="menu" value="vegetariano"> Vegetariano</label>
+            <label><input type="radio" name="menu" value="infantil"> Infantil</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="check-group" style="text-transform:none;font-weight:400;">
+            <input type="checkbox" name="necesita_bus" value="si">
+            Necesito autobús (la información de horarios y paradas se publicará más adelante)
+          </label>
+        </div>
+
+        <div class="field">
+          <label for="rsvpAlergias">Alergias o intolerancias alimentarias</label>
+          <textarea id="rsvpAlergias" name="alergias" placeholder="Déjalo en blanco si no aplica"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="check-group" style="text-transform:none;font-weight:400;">
+            <input type="checkbox" id="rsvpConsentSalud" name="consiente_salud" value="si">
+            Doy mi consentimiento explícito para tratar este dato de salud, con la única finalidad de organizar el menú.
+          </label>
+        </div>
+
+        <div class="field">
+          <label for="rsvpContacto">Teléfono o email de contacto</label>
+          <input type="text" id="rsvpContacto" name="contacto" data-validate="email-or-phone" required>
+        </div>
+
+        <div class="field">
+          <label for="rsvpCancion">Una canción que no puede faltar (opcional)</label>
+          <input type="text" id="rsvpCancion" name="cancion">
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn">Enviar confirmación</button>
+        </div>
+        <div class="form-msg" role="alert"></div>
+
+        <p style="font-size:13px;color:var(--ink-soft);text-align:center;line-height:1.6;">
+          Responsable: Eduardo y Cora. Finalidad: organizar la asistencia, el menú y el transporte de la boda.
+          Estos datos se conservarán hasta unos 4 meses después de la boda y después se eliminarán.
+          Para consultar, corregir o borrar tus datos, contacta directamente con Eduardo o Cora.
+        </p>
+      </form>
+    </section>
+  </div>
+</main>
+
+<div class="modal-overlay" id="rsvpSuccessModal">
+  <div class="modal">
+    <h2>Confirmación enviada</h2>
+    <p>Gracias — hemos recibido vuestra confirmación correctamente.</p>
+    <button type="button" class="btn" data-close-modal>Cerrar</button>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="deco-flourish" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3c-4.5 4-4.5 10.5 0 15 4.5-4.5 4.5-11 0-15z"/><path d="M12 21V9"/></svg></div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

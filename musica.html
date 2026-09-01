@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Música — Eduardo &amp; Cora</title>
+<meta name="description" content="Proponed y votad las canciones para la boda de Eduardo y Cora.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="musica.html">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="deco-flourish" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3c-4.5 4-4.5 10.5 0 15 4.5-4.5 4.5-11 0-15z"/><path d="M12 21V9"/></svg></div>
+  <h1 class="couple-names" style="font-size:var(--t-script-name);font-family:var(--script);color:var(--name-color);border:0;text-align:center;margin:-2.6rem 0 0;">Eduardo &amp; Cora</h1>
+</header>
+
+<nav class="site-nav" aria-label="Navegación principal">
+  <ul>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="confirmar-asistencia.html">Confirmar asistencia</a></li>
+    <li><a href="informacion.html">Información</a></li>
+    <li><a href="hoteles.html">Hoteles</a></li>
+    <li><a href="transporte.html">Transporte</a></li>
+    <li><a href="lista-de-bodas.html">Lista de bodas</a></li>
+    <li><a href="musica.html" aria-current="page">Música</a></li>
+    <li><a href="dress-code.html">Dress code</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="wrap">
+    <section class="section rv">
+      <h1>Hagamos juntos la playlist perfecta</h1>
+      <hr class="divider">
+      <p class="lede">Queremos que la fiesta sea la mejor posible para todos. Proponed canciones que os gustaría escuchar y votad las que ya han propuesto otros invitados.</p>
+
+      <form id="musicForm" class="stack" novalidate>
+        <input type="text" name="web" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+        <div class="field">
+          <label for="musicArtista">Artista</label>
+          <input type="text" id="musicArtista" name="artista" required>
+        </div>
+        <div class="field">
+          <label for="musicCancion">Canción</label>
+          <input type="text" id="musicCancion" name="cancion" required>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn">Añadir canción</button>
+        </div>
+        <div class="form-msg" role="alert" id="musicAddMsg"></div>
+      </form>
+
+      <p class="lede" style="margin-top:var(--s5);margin-bottom:0;">Esta es la lista de canciones hasta el momento:</p>
+      <div class="song-list" id="songList">
+        <!-- Se rellena por JS (assets/js/main.js → loadSongList) desde api/musica.php?action=list -->
+        <p style="text-align:center;color:var(--ink-soft);font-style:italic;" id="songListEmpty">Todavía no hay ninguna canción propuesta. ¡Sé el primero!</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="deco-flourish" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3c-4.5 4-4.5 10.5 0 15 4.5-4.5 4.5-11 0-15z"/><path d="M12 21V9"/></svg></div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

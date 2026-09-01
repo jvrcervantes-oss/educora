@@ -1,0 +1,10 @@
+# Bloqueo total — rsvp.json / canciones.json / panel_attempts.json contienen
+# datos personales de invitados (teléfono, email, alergias). Solo el propio
+# PHP del proyecto (fopen relativo) los lee/escribe; nunca se sirven por HTTP.
+<IfModule mod_authz_core.c>
+  Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+  Order allow,deny
+  Deny from all
+</IfModule>

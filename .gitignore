@@ -1,0 +1,5 @@
+# Datos reales de invitados — nunca en git (los crea el propio PHP en runtime)
+guardado/*.json
+
+# Backups locales
+Backups/*
