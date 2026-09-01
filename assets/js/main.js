@@ -246,7 +246,11 @@
           .sort(function (a, b) { return b.votos - a.votos; })
           .forEach(function (song) { list.appendChild(buildSongCard(song)); });
       })
-      .catch(function () {});
+      .catch(function () {
+        // Un catch mudo aquí dejaría el mensaje "todavía no hay canciones"
+        // puesto por defecto, que es indistinguible de un fallo de red real.
+        if (empty) empty.textContent = 'No se ha podido cargar la lista de canciones. Recarga la página.';
+      });
   }
 
   document.addEventListener('DOMContentLoaded', function () {
