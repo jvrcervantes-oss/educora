@@ -78,16 +78,17 @@ b, strong{ font-family: var(--body); font-weight: 500; }
 
 /* ---------- Fondo con imagen — solo Inicio (pedido 1-sep-2026: "el fondo
    se ve muy plano, destaca los textos"). Lavado casi blanco para que siga
-   leyéndose como tonos claros, no como una foto a tamaño real. Imagen
-   placeholder (Unsplash, ver nota de fuentes al final) — a sustituir por
-   foto real de la pareja cuando llegue. */
+   leyéndose como tonos claros, no como una foto a tamaño real.
+   Corregido 1-sep-2026: era un mosaico repetido (background-size:640px +
+   repeat) y quedaba mal — ahora es UNA sola imagen fija, sin repetir. */
 body.page-home{
   background-image:
-    linear-gradient(rgba(255,255,255,.90), rgba(255,255,255,.94)),
-    url('assets/images/placeholder-textura.webp');
-  background-size: 640px;
+    linear-gradient(rgba(255,255,255,.82), rgba(255,255,255,.9)),
+    url('assets/images/placeholder-hero.webp');
+  background-size: cover;
+  background-position: center;
   background-attachment: fixed;
-  background-repeat: repeat;
+  background-repeat: no-repeat;
 }
 
 /* ---------- Tarjeta de texto — para que el texto no se lave contra la
@@ -603,7 +604,15 @@ form.stack{
   .gallery-2{ grid-template-columns: 1fr; }
   form.stack{ max-width: 100%; }
   .site-header--photo{ background-attachment: scroll; }
-  body.page-home{ background-attachment: scroll; } /* fixed + scroll de Safari iOS repinta mal */
+  /* fixed + scroll de Safari iOS repinta mal, así que aquí va `scroll` —
+     pero con `cover` eso estira la imagen a la altura de TODA la página
+     (móvil es una columna larga) y la deja casi invisible. Tamaño fijo
+     anclado arriba en su lugar: sigue siendo una sola imagen, sin repetir. */
+  body.page-home{
+    background-attachment: scroll;
+    background-size: auto, 640px auto;
+    background-position: center, center -40px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -612,10 +621,11 @@ form.stack{
 }
 
 /* ============================================================
-   Imágenes placeholder (pedido explícito 1-sep-2026, "tonos claros",
-   mientras llega la foto real de la pareja):
-   - assets/images/placeholder-hero.webp    → Unsplash, foto 1508717272800-9fff97da7e8f
-   - assets/images/placeholder-textura.webp → Unsplash, foto 1533746873999-216ac24b7e5c
-   Licencia Unsplash (uso libre). SUSTITUIR por fotos reales antes de
-   compartir el enlace con invitados — ver contexto/proyecto_educora.md.
+   Imágenes:
+   - assets/images/pareja-hero.webp      → foto real de Eduardo y Cora
+     (aportada por el cliente 1-sep-2026), panel de Inicio.
+   - assets/images/placeholder-hero.webp → Unsplash, foto
+     1508717272800-9fff97da7e8f (licencia libre). Ambientación de flores
+     en la franja del header y fondo de Inicio — una sola instancia, sin
+     repetir (corregido 1-sep-2026, se veía en mosaico y quedaba mal).
    ============================================================ */
