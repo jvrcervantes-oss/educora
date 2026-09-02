@@ -118,7 +118,7 @@ function h($v): string { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8
       </div>
     </section>
 
-    <p style="text-align:center;"><a href="panel-logout.php" style="color:var(--ink-soft);text-decoration:underline;">Cerrar sesión</a></p>
+    <p style="text-align:center;"><a href="panel-logout" style="color:var(--ink-soft);text-decoration:underline;">Cerrar sesión</a></p>
 
   </div>
 </main>

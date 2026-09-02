@@ -20,6 +20,25 @@
     els.forEach(function (el) { io.observe(el); });
   }
 
+  // ---------- Nav móvil: hamburguesa ----------
+  function initNav() {
+    var nav = document.querySelector('.site-nav');
+    if (!nav) return;
+    var btn = nav.querySelector('.nav-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.focus();
+      }
+    });
+  }
+
   // ---------- Countdown real a la fecha de la boda ----------
   // Ceremonia: 01/05/2027 12:00 (hora local del navegador del invitado)
   function initCountdown() {
@@ -254,6 +273,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    initNav();
     initReveal();
     initCountdown();
     initTabs();

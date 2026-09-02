@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             panel_record_success();
             session_regenerate_id(true);
             $_SESSION['panel_auth'] = true;
-            header('Location: panel.php');
+            header('Location: panel');
             exit;
         }
         panel_record_failed_attempt();
