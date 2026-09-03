@@ -6,7 +6,7 @@
    (ver nota de fuentes al final de este bloque).
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap');
 
 :root{
   /* Color — medido de la referencia, un único acento (verde salvia) */
@@ -25,15 +25,18 @@
   --divider: #655962;
   --song-card-bg: #F7F7F7;
 
-  /* Tipografía — Poppins es match exacto; Cormorant Garamond y Great Vibes
-     son equivalentes libres de helloParishSerifMedium / missKatherineScript
-     (fuentes propietarias del template origen, sin licencia confirmada).
-     Great Vibes: caligráfica de invitación clásica, más formal que un
-     brush script casual — pedido explícito 1-sep-2026 ("fuente apropiada
-     para un convite"). */
+  /* Tipografía — Cormorant Garamond y Great Vibes son equivalentes libres de
+     helloParishSerifMedium / missKatherineScript (fuentes propietarias del
+     template origen, sin licencia confirmada). Great Vibes: caligráfica de
+     invitación clásica, más formal que un brush script casual — pedido
+     explícito 1-sep-2026 ("fuente apropiada para un convite"). Body:
+     Poppins (match exacto del original) sustituida por Jost el 3-sep-2026
+     — mismo pedido, esta vez sobre el texto de cuerpo ("fuente más de
+     bodas"); Jost es más elegante y menos corporativa manteniendo la
+     legibilidad de un sans a tamaño de párrafo. */
   --display: 'Cormorant Garamond', Georgia, serif;
   --script: 'Great Vibes', cursive;
-  --body: 'Poppins', sans-serif;
+  --body: 'Jost', sans-serif;
 
   /* Escala — salto brutal de la referencia (120px firma / 18px cuerpo),
      con clamp() para que respire en móvil (la referencia no es responsive:
