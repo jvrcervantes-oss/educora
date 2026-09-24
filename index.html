@@ -17,9 +17,9 @@
 
 <nav class="site-nav" aria-label="Navegación principal">
   <div class="nav-bar">
-    <a class="nav-mono" href="./" aria-label="Eduardo y Cora — Inicio">E &amp; C</a>
-    <ul id="siteMenu">
-      <li class="nav-home"><a href="./" aria-current="page">Inicio</a></li>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteMenu" aria-label="Abrir menú"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="nav-brand" href="./"><span class="nav-names">Eduardo &amp; Cora</span><span class="nav-sub">Nuestra boda</span></a>
+    <ul class="nav-links">
       <li><a href="informacion">Información</a></li>
       <li><a href="hoteles">Hoteles</a></li>
       <li><a href="transporte">Transporte</a></li>
@@ -27,59 +27,191 @@
       <li><a href="musica">Música</a></li>
       <li><a href="dress-code">Dress code</a></li>
     </ul>
-    <a class="nav-cta" href="confirmar-asistencia"><span class="nav-cta-long">Confirmar asistencia</span><span class="nav-cta-short">Confirmar</span></a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteMenu"><span class="nav-toggle-icon" aria-hidden="true"></span>Menú</button>
+    <a class="btn nav-cta" href="confirmar-asistencia">Confirmar asistencia</a>
+    <a class="nav-heart" href="confirmar-asistencia" aria-label="Confirmar asistencia"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></a>
   </div>
+  <div class="nav-drawer" id="siteMenu">
+    <div class="drawer-head">
+      <span class="nav-names">Eduardo &amp; Cora</span>
+      <button class="nav-close" type="button" data-nav-close aria-label="Cerrar menú"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <ul>
+      <li><a href="./" aria-current="page"><span>Inicio</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="informacion"><span>Información</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="hoteles"><span>Hoteles</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="transporte"><span>Transporte</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="lista-de-bodas"><span>Lista de bodas</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="musica"><span>Música</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li><a href="dress-code"><span>Dress code</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></li>
+      <li class="drawer-rsvp"><a href="confirmar-asistencia"><span>Confirmar asistencia</span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></a></li>
+    </ul>
+    <div class="drawer-foot">
+      <p class="mono">E &amp; C</p>
+      <p class="kicker">01 · 05 · 2027 · Murcia</p>
+    </div>
+  </div>
+</nav>
+<nav class="tab-bar" aria-label="Accesos rápidos">
+  <ul>
+    <li><a href="./" aria-current="page"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</a></li>
+    <li><a href="confirmar-asistencia"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>RSVP</a></li>
+    <li><a href="lista-de-bodas"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12M12 8C10 4 6.5 4.5 7 7c.3 1.2 2.5 1 5 1zm0 0c2-4 5.5-3.5 5-1-.3 1.2-2.5 1-5 1z"/></svg>Regalos</a></li>
+    <li><a href="informacion"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>Info</a></li>
+    <li><a href="musica"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>Música</a></li>
+  </ul>
 </nav>
 
 <main class="home">
 
-  <article class="invite rv">
-    <div class="invite-inner">
-      <div class="invite-arch">
-        <img src="assets/images/pareja-hero.webp" alt="Eduardo y Cora" width="960" height="1280" loading="eager">
-      </div>
-      <p class="invite-kicker">Tenemos el placer de invitaros a nuestra boda</p>
-      <h1 class="invite-names">Eduardo <span class="amp">&amp;</span> Cora</h1>
-      <p class="invite-date" aria-label="Sábado, 1 de mayo de 2027">
-        <span>Sábado</span><span class="rule" aria-hidden="true"></span><span class="day">01</span><span class="rule" aria-hidden="true"></span><span>Mayo</span>
-      </p>
-      <p class="invite-year">2027</p>
-
-      <div class="invite-events">
-        <div class="invite-event">
-          <span class="event-label">Ceremonia · 12:00</span>
-          <span class="event-place">Catedral de Murcia</span>
-          <a href="informacion#tab-ceremonia">Ver mapa</a>
-        </div>
-        <div class="invite-event">
-          <span class="event-label">Convite · 14:00</span>
-          <span class="event-place">Dehesa de Campoamor</span>
-          <a href="informacion#tab-banquete">Ver mapa</a>
+  <section class="hero">
+    <div class="hero-left">
+      <img class="hero-sprig" src="assets/images/eucalipto.webp" alt="" width="512" height="140">
+      <div class="hero-text">
+        <span class="kicker">Tenemos el placer de invitaros a nuestra boda</span>
+        <h1 class="hero-names">Eduardo &amp; Cora</h1>
+        <div class="hero-date">
+          <span class="rule" aria-hidden="true"></span><span class="star" aria-hidden="true">✦</span>
+          <span class="kicker">01 · 05 · 2027 · Murcia</span>
+          <span class="star" aria-hidden="true">✦</span><span class="rule" aria-hidden="true"></span>
         </div>
       </div>
-
-      <a class="btn" href="confirmar-asistencia">Confirmar asistencia</a>
     </div>
-  </article>
-
-  <section class="countdown rv" id="countdown" aria-label="Cuenta atrás para la boda">
-    <div class="countdown-item"><b data-c="days">0</b><span>días</span></div>
-    <div class="countdown-item"><b data-c="hours">0</b><span>horas</span></div>
-    <div class="countdown-item"><b data-c="mins">0</b><span>minutos</span></div>
-    <div class="countdown-item"><b data-c="secs">0</b><span>segundos</span></div>
+    <div class="mat rv">
+      <div class="mat-inner">
+        <div class="mat-photo">
+          <img src="assets/images/pareja-hero.webp" alt="Eduardo y Cora en Budapest" width="960" height="1280" loading="eager">
+        </div>
+        <p class="mat-caption">Eduardo &amp; Cora · 01 · 05 · 2027 · Murcia</p>
+      </div>
+    </div>
   </section>
 
-  <p class="home-welcome rv">Después de años juntos, llegó el momento de dar el paso más importante. Queremos compartir este día con las personas que más queremos — gracias por formar parte de nuestra historia y por acompañarnos en esta nueva etapa.</p>
+  <section class="letter rv">
+    <span class="kicker">Nuestra historia</span>
+    <h2 class="section-title">Os damos la bienvenida</h2>
+    <div class="mini-rule" aria-hidden="true"></div>
+    <p class="big">Después de años juntos, llegó el momento de dar el paso más importante.</p>
+    <p>Queremos compartir este día con las personas que más queremos — gracias por formar parte de nuestra historia y por acompañarnos en esta nueva etapa.</p>
+    <a class="btn" href="confirmar-asistencia"><svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>Confirmar asistencia</a>
+  </section>
 
-  <p class="home-dress rv">Dress code — <a href="dress-code">nada de blanco</a></p>
+  <section class="save-band">
+    <div class="save-card rv">
+      <span class="kicker">Guardad el momento</span>
+      <h2>Anotad la fecha</h2>
+      <p class="save-date-text">Sábado, 1 de mayo de 2027</p>
+      <div class="countdown" id="countdown" aria-label="Cuenta atrás para la boda">
+        <div class="countdown-item"><b data-c="days">0</b><span>Días</span></div>
+        <div class="countdown-item"><b data-c="hours">0</b><span>Horas</span></div>
+        <div class="countdown-item"><b data-c="mins">0</b><span>Min</span></div>
+        <div class="countdown-item"><b data-c="secs">0</b><span>Seg</span></div>
+      </div>
+      <button class="btn cal-btn" type="button" id="calBtn" aria-expanded="false" aria-controls="calOptions"><svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg>Añadir a mi calendario</button>
+      <div class="cal-options" id="calOptions" hidden>
+        <span class="kicker">Elige tu calendario</span>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Boda+de+Eduardo+y+Cora&amp;dates=20270501/20270502&amp;details=Ceremonia+a+las+12%3A00+en+la+Catedral+de+Murcia.+Convite+a+las+14%3A00+en+Dehesa+de+Campoamor.&amp;location=Catedral+de+Murcia" target="_blank" rel="noopener noreferrer"><span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Google Calendar</span><svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="assets/boda-eduardo-cora.ics" download><span><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg>Apple / Outlook (.ics)</span><svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="itinerary">
+    <div class="itinerary-head rv">
+      <span class="kicker">Itinerario</span>
+      <h2 class="section-title">Ceremonia y convite</h2>
+      <p>Acompañadnos en los dos momentos de nuestro día.</p>
+    </div>
+    <div class="event-list">
+      <article class="event-card rv">
+        <div class="event-top">
+          <div>
+            <span class="kicker">12:00 · Ceremonia</span>
+            <h3>Catedral de Murcia</h3>
+            <p class="where">Murcia</p>
+          </div>
+          <div class="icon-dot" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M12 2v4M10 4h4M6 21V11l6-4 6 4v10M3 21h18M10 21v-5h4v5"/></svg></div>
+        </div>
+        <a class="btn btn-soft" href="https://maps.google.com/?q=Catedral+de+Murcia" target="_blank" rel="noopener noreferrer"><svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg>Ver mapa · Ceremonia</a>
+      </article>
+      <article class="event-card rv">
+        <div class="event-top">
+          <div>
+            <span class="kicker">14:00 · Convite</span>
+            <h3>Dehesa de Campoamor</h3>
+            <p class="where">Todos los detalles en <a href="informacion#tab-banquete" style="text-decoration:underline;text-underline-offset:3px;">Información</a></p>
+          </div>
+          <div class="icon-dot" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg></div>
+        </div>
+        <a class="btn btn-soft" href="https://maps.google.com/?q=Dehesa+de+Campoamor" target="_blank" rel="noopener noreferrer"><svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg>Ver mapa · Convite</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="quick">
+    <div class="quick-grid">
+      <div class="q-card q-rsvp rv">
+        <div class="q-label"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span class="kicker" style="color:inherit">Confirmación</span></div>
+        <h3>Confirmar asistencia</h3>
+        <p>No hay fecha límite, pero cuanto antes confirméis, antes podremos organizarlo todo.</p>
+        <a class="btn btn-light" href="confirmar-asistencia">Confirmar asistencia</a>
+      </div>
+
+      <div class="q-card q-dress rv">
+        <div class="q-head">
+          <div class="q-label"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7a2 2 0 1 1 2-2c0 1-2 1.5-2 3M12 8 3 16h18z"/></svg><span class="kicker">Código de vestimenta</span></div>
+          <span class="tag">Importante</span>
+        </div>
+        <div class="dress-line">
+          <a href="dress-code">Dress code — <span>nada de blanco</span></a>
+        </div>
+      </div>
+
+      <div class="q-pair">
+        <div class="q-card rv">
+          <div>
+            <div class="q-label"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18V7M3 14h18v4M21 14v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11" r="1.5"/></svg><span class="kicker">Alojamiento</span></div>
+            <h3>Hoteles</h3>
+            <p>Opciones cerca de la ceremonia y el convite.</p>
+          </div>
+          <a class="link-arrow" href="hoteles">Ver hoteles <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="q-card rv">
+          <div>
+            <div class="q-label"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="14" rx="2"/><path d="M4 11h16M7 17v3M17 17v3"/><circle cx="8" cy="14" r=".6"/><circle cx="16" cy="14" r=".6"/></svg><span class="kicker">Desplazamiento</span></div>
+            <h3>Transporte</h3>
+            <p>Autobús entre la ceremonia y el convite.</p>
+          </div>
+          <a class="link-arrow" href="transporte">Ver transporte <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+
+      <div class="q-card rv">
+        <div class="q-label"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12M12 8C10 4 6.5 4.5 7 7c.3 1.2 2.5 1 5 1zm0 0c2-4 5.5-3.5 5-1-.3 1.2-2.5 1-5 1z"/></svg><span class="kicker">Detalle con nosotros</span></div>
+        <h3>Lista de bodas</h3>
+        <p>Vuestra compañía en nuestro día más especial es el mejor regalo; si además queréis contribuir, aquí tenéis cómo.</p>
+        <a class="link-arrow" href="lista-de-bodas">Ver lista de bodas <svg class="ico ico-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+
+      <div class="q-card q-music rv">
+        <div>
+          <span class="kicker" style="margin-bottom:4px">¿Qué canción no puede faltar?</span>
+          <h3>Música</h3>
+          <p>Proponed canciones y votad las de otros invitados.</p>
+        </div>
+        <a class="round-btn" href="musica" aria-label="Ir a Música"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="sprig-foot" aria-hidden="true"><img src="assets/images/eucalipto.webp" alt="" width="512" height="140"></div>
 
 </main>
 
 <footer class="site-footer">
-  <p class="footer-names">Eduardo &amp; Cora</p>
-  <p class="footer-date">01 · 05 · 2027 · Murcia</p>
-  <a class="footer-cta" href="confirmar-asistencia">Confirmar asistencia</a>
+  <div class="footer-mono" aria-hidden="true"><span class="rule"></span><span>E &amp; C</span><span class="rule"></span></div>
+  <p class="footer-thanks">Gracias por formar parte de nuestra historia.</p>
+  <a class="btn" href="confirmar-asistencia">Confirmar asistencia</a>
+  <p class="kicker">Eduardo &amp; Cora · 01 · 05 · 2027 · Murcia</p>
 </footer>
 
 <script src="assets/js/main.js" defer></script>

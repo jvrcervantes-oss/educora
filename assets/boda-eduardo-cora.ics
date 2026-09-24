@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Eduardo y Cora//Boda//ES
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:boda-eduardo-cora-20270501@eduycora.axisworks.studio
+DTSTAMP:20260924T120000Z
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270502
+SUMMARY:Boda de Eduardo y Cora
+DESCRIPTION:Ceremonia a las 12:00 en la Catedral de Murcia. Convite a las 14:00 en Dehesa de Campoamor.
+LOCATION:Catedral de Murcia
+URL:https://eduycora.axisworks.studio/
+END:VEVENT
+END:VCALENDAR

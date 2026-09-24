@@ -20,22 +20,44 @@
     els.forEach(function (el) { io.observe(el); });
   }
 
-  // ---------- Nav móvil: hamburguesa ----------
+  // ---------- Menú a pantalla completa (móvil) ----------
+  // .site-nav.open muestra #siteMenu; se cierra con la X, al elegir un
+  // enlace o con Escape, y mientras está abierto el fondo no hace scroll.
   function initNav() {
     var nav = document.querySelector('.site-nav');
     if (!nav) return;
     var btn = nav.querySelector('.nav-toggle');
     if (!btn) return;
-    btn.addEventListener('click', function () {
-      var open = nav.classList.toggle('open');
+    var closeBtn = nav.querySelector('[data-nav-close]');
+    function setOpen(open) {
+      nav.classList.toggle('open', open);
+      document.body.classList.toggle('nav-lock', open);
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (open && closeBtn) closeBtn.focus();
+      if (!open) btn.focus();
+    }
+    btn.addEventListener('click', function () { setOpen(!nav.classList.contains('open')); });
+    if (closeBtn) closeBtn.addEventListener('click', function () { setOpen(false); });
+    nav.querySelectorAll('#siteMenu a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        nav.classList.remove('open');
+        document.body.classList.remove('nav-lock');
+      });
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && nav.classList.contains('open')) {
-        nav.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-        btn.focus();
-      }
+      if (e.key === 'Escape' && nav.classList.contains('open')) setOpen(false);
+    });
+  }
+
+  // ---------- Añadir al calendario ----------
+  function initCalendar() {
+    var btn = document.getElementById('calBtn');
+    var box = document.getElementById('calOptions');
+    if (!btn || !box) return;
+    btn.addEventListener('click', function () {
+      var open = box.hasAttribute('hidden');
+      if (open) box.removeAttribute('hidden'); else box.setAttribute('hidden', '');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   }
 
@@ -61,10 +83,11 @@
       var h = Math.floor((diff % 86400000) / 3600000);
       var m = Math.floor((diff % 3600000) / 60000);
       var s = Math.floor((diff % 60000) / 1000);
-      days.textContent = d;
-      hours.textContent = h;
-      mins.textContent = m;
-      secs.textContent = s;
+      function two(n) { return n < 10 ? '0' + n : String(n); }
+      days.textContent = two(d);
+      hours.textContent = two(h);
+      mins.textContent = two(m);
+      secs.textContent = two(s);
     }
     tick();
     var timer = setInterval(tick, 1000);
@@ -274,6 +297,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     initNav();
+    initCalendar();
     initReveal();
     initCountdown();
     initTabs();
