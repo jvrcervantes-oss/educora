@@ -19,6 +19,39 @@ foreach ($rsvps as $r) {
     if (isset($menus[$m])) $menus[$m]++;
 }
 function h($v): string { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); }
+
+// Descarga de las confirmaciones para abrir en Excel: `;` y BOM UTF-8 porque
+// es lo que el Excel en español abre bien a doble clic. Una celda que empieza
+// por = + - @ se neutraliza con ' delante: la escribe un invitado, no la pareja.
+if (($_GET['export'] ?? '') === 'csv') {
+    $celda = function ($v): string {
+        $v = (string) $v;
+        return ($v !== '' && strpbrk($v[0], "=+-@\t\r") !== false) ? "'" . $v : $v;
+    };
+    $sino = fn($v) => !empty($v) ? 'Sí' : 'No';
+    header('Content-Type: text/csv; charset=UTF-8');
+    header('Content-Disposition: attachment; filename="confirmaciones-edu-cora-' . date('Y-m-d') . '.csv"');
+    header('Cache-Control: no-store');
+    $out = fopen('php://output', 'w');
+    fwrite($out, "\xEF\xBB\xBF");
+    fputcsv($out, ['Nombre', 'Acompañantes', 'Ceremonia', 'Banquete', 'Menú', 'Bus', 'Alergias', 'Contacto', 'Canción', 'Enviado'], ';');
+    foreach (array_reverse($rsvps) as $r) {
+        fputcsv($out, [
+            $celda($r['nombre'] ?? ''),
+            $celda(str_replace(["\r\n", "\n"], ', ', (string) ($r['acompanantes'] ?? ''))),
+            $sino($r['asiste_ceremonia'] ?? null),
+            $sino($r['asiste_banquete'] ?? null),
+            $celda($r['menu'] ?? ''),
+            $sino($r['necesita_bus'] ?? null),
+            $celda($r['alergias'] ?? ''),
+            $celda($r['contacto'] ?? ''),
+            $celda($r['cancion'] ?? ''),
+            isset($r['fecha_envio']) ? date('d/m/Y H:i', strtotime($r['fecha_envio'])) : '',
+        ], ';');
+    }
+    fclose($out);
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -65,6 +98,7 @@ function h($v): string { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8
     <section class="section">
       <h1>Confirmaciones</h1>
       <hr class="divider">
+      <p style="text-align:center;margin:0 0 var(--s4);"><a class="btn" href="panel?export=csv">Descargar en Excel</a></p>
       <div class="table-wrap">
         <table>
           <thead>

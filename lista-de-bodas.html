@@ -11,23 +11,21 @@
 </head>
 <body>
 
-<header class="site-header">
-  <div class="deco-flourish" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3c-4.5 4-4.5 10.5 0 15 4.5-4.5 4.5-11 0-15z"/><path d="M12 21V9"/></svg></div>
-  <h1 class="couple-names" style="font-size:var(--t-script-name);font-family:var(--script);color:var(--name-color);border:0;text-align:center;margin:-2.6rem 0 0;">Eduardo &amp; Cora</h1>
-</header>
-
 <nav class="site-nav" aria-label="Navegación principal">
-  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteMenu"><span class="nav-toggle-icon" aria-hidden="true"></span>Menú</button>
-  <ul id="siteMenu">
-    <li><a href="./">Inicio</a></li>
-    <li><a href="confirmar-asistencia">Confirmar asistencia</a></li>
-    <li><a href="informacion">Información</a></li>
-    <li><a href="hoteles">Hoteles</a></li>
-    <li><a href="transporte">Transporte</a></li>
-    <li><a href="lista-de-bodas" aria-current="page">Lista de bodas</a></li>
-    <li><a href="musica">Música</a></li>
-    <li><a href="dress-code">Dress code</a></li>
-  </ul>
+  <div class="nav-bar">
+    <a class="nav-mono" href="./" aria-label="Eduardo y Cora — Inicio">E &amp; C</a>
+    <ul id="siteMenu">
+      <li class="nav-home"><a href="./">Inicio</a></li>
+      <li><a href="informacion">Información</a></li>
+      <li><a href="hoteles">Hoteles</a></li>
+      <li><a href="transporte">Transporte</a></li>
+      <li><a href="lista-de-bodas" aria-current="page">Lista de bodas</a></li>
+      <li><a href="musica">Música</a></li>
+      <li><a href="dress-code">Dress code</a></li>
+    </ul>
+    <a class="nav-cta" href="confirmar-asistencia"><span class="nav-cta-long">Confirmar asistencia</span><span class="nav-cta-short">Confirmar</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteMenu"><span class="nav-toggle-icon" aria-hidden="true"></span>Menú</button>
+  </div>
 </nav>
 
 <main>
@@ -52,7 +50,9 @@
 </main>
 
 <footer class="site-footer">
-  <div class="deco-flourish" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3c-4.5 4-4.5 10.5 0 15 4.5-4.5 4.5-11 0-15z"/><path d="M12 21V9"/></svg></div>
+  <p class="footer-names">Eduardo &amp; Cora</p>
+  <p class="footer-date">01 · 05 · 2027 · Murcia</p>
+  <a class="footer-cta" href="confirmar-asistencia">Confirmar asistencia</a>
 </footer>
 
 <script src="assets/js/main.js" defer></script>

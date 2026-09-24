@@ -1,29 +1,31 @@
 /* ============================================================
    Edu & Cora — sistema visual
-   Calco de alta fidelidad de Green Leaves (bodayweb.es).
-   Valores medidos literalmente del CSS fuente de la referencia
-   (base 10px → 1rem = 10px). Fuentes: equivalentes libres
-   (ver nota de fuentes al final de este bloque).
+   24-sep-2026: diseño PROPIO "Invitación" (Propuesta B del lienzo de
+   rediseño, elegida por el owner). Deja de ser calco de Green Leaves:
+   papel crudo, una tarjeta con filete, un solo acento salvia, sin
+   sombras. Se conservan las tres fuentes que eligió la pareja.
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap');
 
 :root{
   /* Color — medido de la referencia, un único acento (verde salvia) */
-  --bg: #DDDDDD;
-  --surface: #FFFFFF;
-  --ink: #463E44;
-  --ink-soft: #655962;
-  --h1-home: #3A3A3A;
-  --name-color: #2E3132;
-  --accent: #446C5F;
-  --accent-hover: #335248;
-  --nav-bg: #F2F5F0;
-  --error: #DD3E44;
-  --border-input: #A0A0A0;
-  --border-input-focus: #446C5F;
-  --divider: #655962;
-  --song-card-bg: #F7F7F7;
+  --bg: #EEE8DD;          /* papel crudo */
+  --surface: #FBF8F2;     /* la tarjeta */
+  --field: #FFFFFF;
+  --ink: #34302F;
+  --ink-soft: #625A55;
+  --h1-home: #34302F;
+  --name-color: #34302F;
+  --accent: #5C6B55;      /* salvia — único acento */
+  --accent-hover: #48553F;
+  --line: #DDD4C4;        /* filetes */
+  --nav-bg: #EEE8DD;
+  --error: #B3363B;
+  --border-input: #B9AF9F;
+  --border-input-focus: #5C6B55;
+  --divider: #5C6B55;
+  --song-card-bg: #F3EEE5;
 
   /* Tipografía — Cormorant Garamond y Great Vibes son equivalentes libres de
      helloParishSerifMedium / missKatherineScript (fuentes propietarias del
@@ -79,57 +81,11 @@ img{ max-width: 100%; display: block; }
 a{ color: inherit; text-decoration: none; }
 b, strong{ font-family: var(--body); font-weight: 500; }
 
-/* ---------- Fondo con imagen — solo Inicio (pedido 1-sep-2026: "el fondo
-   se ve muy plano, destaca los textos"). Lavado casi blanco para que siga
-   leyéndose como tonos claros, no como una foto a tamaño real.
-   Corregido 1-sep-2026: era un mosaico repetido (background-size:640px +
-   repeat) y quedaba mal — ahora es UNA sola imagen fija, sin repetir. */
-body.page-home{
-  background-image:
-    linear-gradient(rgba(255,255,255,.82), rgba(255,255,255,.9)),
-    url('assets/images/placeholder-hero.webp');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
-
-/* ---------- Tarjeta de texto — para que el texto no se lave contra la
-   imagen de fondo (mismo pedido de arriba) ---------- */
-.text-card{
-  background: rgba(255,255,255,.86);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border-radius: var(--r-sm);
-  box-shadow: 0 3px 8px rgba(0,0,0,.08);
-  padding: var(--s4) var(--s3);
-}
-
 .wrap{
   width: min(980px, 100% - 32px);
   margin: 0 auto;
 }
 
-/* ---------- Header ---------- */
-.site-header{
-  padding: var(--s5) 0 var(--s3);
-  text-align: center;
-}
-/* Franja de foto detrás del nombre — solo Inicio. Overlay claro para que
-   el script siga legible y "destaque" en vez de lavarse contra la foto. */
-.site-header--photo{
-  position: relative;
-  padding: var(--s6) 0 var(--s5);
-  background-image:
-    linear-gradient(180deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.75) 55%, rgba(255,255,255,.95) 100%),
-    url('assets/images/placeholder-hero.webp');
-  background-size: cover;
-  background-position: center 30%;
-  border-radius: 0 0 28px 28px;
-}
-.site-header--photo .couple-names{
-  text-shadow: 0 2px 20px rgba(255,255,255,.85), 0 1px 4px rgba(255,255,255,.9);
-}
 .deco-flourish{
   display: flex;
   align-items: center;
@@ -156,53 +112,84 @@ body.page-home{
   line-height: 1;
 }
 
-/* ---------- Nav ---------- */
+/* ---------- Nav (24-sep-2026) ----------
+   Barra fina fija arriba: monograma a la izquierda, enlaces, y
+   "Confirmar asistencia" como botón siempre visible — es la acción que
+   importa (el formulario), así que no va escondida entre siete enlaces.
+   Por debajo de 900px los enlaces se pliegan en "Menú"; el botón de
+   confirmar se queda fuera del desplegable, en la barra. */
 .site-nav{
-  background: var(--nav-bg);
-  border-top: 1px solid rgba(0,0,0,.05);
-  border-bottom: 1px solid rgba(0,0,0,.05);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(238,232,221,.94);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-bar{
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  width: min(1200px, 100% - 32px);
+  min-height: 68px;
+  margin: 0 auto;
+}
+.nav-mono{
+  font-family: var(--script);
+  font-size: 32px;
+  line-height: 1;
+  color: var(--ink);
+  padding: 6px 0;
+  white-space: nowrap;
 }
 .site-nav ul{
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: var(--s2) var(--s4);
+  gap: var(--s3);
+  flex: 1;
   margin: 0;
-  padding: var(--s2) var(--s2);
+  padding: 0;
 }
-.site-nav a{
+.site-nav ul a{
+  display: block;
   font-family: var(--body);
-  font-weight: 500;
-  font-size: var(--t-nav);
-  letter-spacing: .04em;
+  font-weight: 400;
+  font-size: 12.5px;
+  letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--ink-soft);
-  padding: var(--s1) 0;
-  position: relative;
+  color: var(--ink);
+  padding: 12px 0;
+  border-bottom: 1px solid transparent;
+  transition: color var(--fast) var(--ease), border-color var(--fast) var(--ease);
 }
-.site-nav a::before,
-.site-nav a::after{
-  content: '·';
-  color: transparent;
-  padding: 0 6px;
-  transition: color var(--fast) var(--ease);
+.site-nav ul a:hover{ color: var(--accent); }
+.site-nav ul a[aria-current="page"]{ color: var(--accent); border-bottom-color: var(--accent); }
+.site-nav .nav-home{ display: none; }
+.nav-cta{
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 12.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #FBF8F2;
+  background: var(--accent);
+  padding: 13px 22px;
+  border-radius: var(--r-pill);
+  transition: background var(--fast) var(--ease);
 }
-.site-nav a[aria-current="page"]{ color: var(--accent); }
-.site-nav a[aria-current="page"]::before,
-.site-nav a[aria-current="page"]::after{ color: var(--accent); }
-.site-nav a:hover{ color: var(--accent); }
+.nav-cta:hover{ background: var(--accent-hover); }
+.nav-cta[aria-current="page"]{ background: transparent; color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.nav-cta-short{ display: none; }
+.site-nav a:focus-visible, .nav-toggle:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
 
-/* ---------- Nav móvil: hamburguesa ----------
-   Con 8 entradas en uppercase el nav envolvía en 2-3 filas por debajo de
-   ~820px y comía media pantalla — por debajo de ese ancho se pliega en un
-   botón. El desplegable empuja el contenido (no es overlay): más robusto
-   y coherente con la página-columna del calco. */
 .nav-toggle{ display: none; }
 .nav-toggle-icon{
   position: relative;
   display: block;
-  width: 20px; height: 2px;
+  width: 18px; height: 1.5px;
   background: currentColor;
   transition: background var(--fast) var(--ease);
 }
@@ -211,40 +198,54 @@ body.page-home{
   content: '';
   position: absolute;
   left: 0;
-  width: 20px; height: 2px;
+  width: 18px; height: 1.5px;
   background: currentColor;
   transition: transform var(--fast) var(--ease);
 }
-.nav-toggle-icon::before{ top: -6px; }
-.nav-toggle-icon::after{ top: 6px; }
+.nav-toggle-icon::before{ top: -5px; }
+.nav-toggle-icon::after{ top: 5px; }
 .site-nav.open .nav-toggle-icon{ background: transparent; }
-.site-nav.open .nav-toggle-icon::before{ transform: translateY(6px) rotate(45deg); }
-.site-nav.open .nav-toggle-icon::after{ transform: translateY(-6px) rotate(-45deg); }
+.site-nav.open .nav-toggle-icon::before{ transform: translateY(5px) rotate(45deg); }
+.site-nav.open .nav-toggle-icon::after{ transform: translateY(-5px) rotate(-45deg); }
 
-@media (max-width: 820px){
+@media (max-width: 900px){
+  .nav-bar{ flex-wrap: wrap; gap: 10px; min-height: 60px; }
+  .nav-mono{ margin-right: auto; }
   .nav-toggle{
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
-    width: 100%;
-    padding: 14px var(--s2);
+    gap: 10px;
+    min-height: 44px;
+    padding: 0 16px;
     background: none;
-    border: 0;
+    border: 1px solid var(--ink);
+    border-radius: var(--r-pill);
     cursor: pointer;
     font-family: var(--body);
-    font-weight: 500;
-    font-size: var(--t-nav);
-    letter-spacing: .04em;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: .14em;
     text-transform: uppercase;
-    color: var(--ink-soft);
+    color: var(--ink);
   }
-  .nav-toggle:focus-visible{ outline: 2px solid var(--accent); outline-offset: -2px; }
-  .site-nav ul{ display: none; flex-direction: column; gap: 0; padding: 0 0 var(--s2); }
+  .nav-cta{ padding: 0 16px; min-height: 44px; display: flex; align-items: center; }
+  .site-nav ul{
+    order: 5;
+    flex-basis: 100%;
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    padding: 4px 0 12px;
+    border-top: 1px solid var(--line);
+  }
   .site-nav.open ul{ display: flex; animation: navDrop 240ms var(--ease-out); }
-  .site-nav li{ text-align: center; }
-  /* 12px arriba/abajo + línea de 15px ≈ 44px: área táctil suficiente */
-  .site-nav a{ display: block; padding: 12px var(--s2); }
+  .site-nav .nav-home{ display: block; }
+  .site-nav ul a{ padding: 14px 0; font-size: 13px; text-align: center; border-bottom: 0; }
+  .site-nav ul a[aria-current="page"]{ border-bottom: 0; }
+}
+@media (max-width: 420px){
+  .nav-cta-long{ display: none; }
+  .nav-cta-short{ display: inline; }
 }
 @keyframes navDrop{
   from{ opacity: 0; transform: translateY(-6px); }
@@ -254,9 +255,7 @@ body.page-home{
 /* ---------- Panel / superficie de contenido ---------- */
 .panel{
   background: var(--surface);
-  border: 1px solid #E5E5E5;
-  box-shadow: 0 3px 8px rgba(0,0,0,.12);
-  border-radius: var(--r-sm);
+  border: 1px solid var(--line);
 }
 
 main{ padding: var(--section) 0; }
@@ -265,15 +264,15 @@ main{ padding: var(--section) 0; }
 
 h1, .h1{
   font-family: var(--display);
-  font-weight: 500;
+  font-weight: 400;
   font-size: var(--t-display);
   color: var(--h1-home);
   text-align: center;
   margin: 0 0 var(--s3);
 }
 .divider{
-  width: 7rem;
-  height: 2px;
+  width: 64px;
+  height: 1px;
   background: var(--accent);
   margin: var(--s3) auto;
   border: 0;
@@ -287,42 +286,7 @@ h1, .h1{
   line-height: 1.7;
 }
 
-/* ---------- Hero / carrusel foto ---------- */
-.hero-frame{
-  overflow: hidden;
-  max-width: 935px;
-  margin: 0 auto var(--section);
-}
-.hero-frame img{ width: 100%; height: auto; aspect-ratio: 935/415; object-fit: cover; }
-/* La foto real de la pareja es vertical (3:4) — panel propio, contenido y
-   sin recorte agresivo, en vez de forzar el ancho panorámico del calco. */
-.hero-frame--portrait{
-  max-width: 420px;
-}
-.hero-frame--portrait img{
-  aspect-ratio: 3/4;
-  object-fit: cover;
-  object-position: center top;
-}
-
-/* ---------- Fecha + countdown ---------- */
-.save-date{
-  text-align: center;
-  margin: var(--section) 0;
-}
-.save-date .label{
-  font-style: italic;
-  font-size: var(--t-small);
-  color: var(--ink-soft);
-  letter-spacing: .04em;
-}
-.save-date .date{
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: var(--t-display);
-  color: var(--accent);
-  margin-top: var(--s1);
-}
+/* ---------- Cuenta atrás (base; la de Inicio se ajusta abajo) ---------- */
 .countdown{
   display: flex;
   justify-content: center;
@@ -359,10 +323,12 @@ h1, .h1{
   color: #fff;
   font-family: var(--body);
   font-weight: 400;
-  font-size: 18px;
-  letter-spacing: .03em;
-  padding: 14px 36px;
-  border-radius: var(--r-md);
+  font-size: 13px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #FBF8F2;
+  padding: 18px 40px;
+  border-radius: var(--r-pill);
   transition: background var(--fast) var(--ease), transform var(--fast) var(--ease);
 }
 .btn:hover{ background: var(--accent-hover); }
@@ -386,9 +352,9 @@ form.stack{
 }
 .field label{
   display: block;
-  font-size: var(--t-small);
-  font-weight: 500;
-  letter-spacing: .04em;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--ink-soft);
   margin-bottom: var(--s1);
@@ -403,9 +369,9 @@ form.stack{
   font-weight: 400;
   font-size: 16px;
   color: var(--ink);
-  background: var(--surface);
+  background: var(--field);
   border: 1px solid var(--border-input);
-  border-radius: var(--r-sm);
+  border-radius: 0;
   padding: 12px 14px;
   transition: border-color var(--fast) var(--ease);
 }
@@ -427,11 +393,16 @@ form.stack{
   flex-wrap: wrap;
   gap: var(--s2) var(--s3);
 }
+/* Las casillas llevan texto de frase, no de rótulo: sin el espaciado de
+   letras de .field label (se veía "D e c l a r o…") */
+.field label.check-group{ display: flex; letter-spacing: normal; font-size: 15px; line-height: 1.5; align-items: flex-start; flex-wrap: nowrap; gap: 10px; }
+.field label.check-group input{ margin-top: 3px; flex-shrink: 0; }
 .check-group label,
 .radio-group label{
   display: flex;
   align-items: center;
   gap: 8px;
+  letter-spacing: normal;
   font-size: 15px;
   color: var(--ink);
   text-transform: none;
@@ -492,12 +463,13 @@ form.stack{
   background: transparent;
   color: var(--accent);
   font-family: var(--body);
-  font-weight: 500;
-  font-size: 15px;
-  letter-spacing: .04em;
+  font-weight: 400;
+  font-size: 12.5px;
+  letter-spacing: .16em;
   text-transform: uppercase;
-  padding: 10px 28px;
-  border-radius: 7px;
+  padding: 12px 28px;
+  border: 1px solid var(--accent);
+  border-radius: var(--r-pill);
   cursor: pointer;
   transition: background var(--fast) var(--ease), color var(--fast) var(--ease);
 }
@@ -507,11 +479,13 @@ form.stack{
 
 .info-title{
   font-family: var(--body);
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: .25em;
+  color: var(--accent) !important;
   color: var(--ink-soft);
   text-align: center;
-  border-bottom: 1px solid var(--ink-soft);
+  border-bottom: 1px solid var(--line);
   padding-bottom: var(--s2);
   margin-bottom: var(--s3);
   max-width: 460px;
@@ -537,19 +511,19 @@ form.stack{
   max-width: 980px;
   margin: 0 auto var(--section);
 }
-.gallery-2 img{ border-radius: var(--r-sm); box-shadow: 0 3px 8px rgba(0,0,0,.12); }
+.gallery-2 img{ border-radius: 0; }
 
 /* ---------- Hoteles ---------- */
 .hotel-card{
   max-width: 640px;
   margin: 0 auto var(--s4);
   padding-bottom: var(--s4);
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid var(--line);
 }
 .hotel-card:last-child{ border-bottom: 0; }
 .hotel-card h3{
   font-family: var(--display);
-  font-weight: 500;
+  font-weight: 400;
   font-size: 26px;
   color: var(--h1-home);
   text-align: center;
@@ -643,10 +617,134 @@ form.stack{
   font-style: italic;
 }
 
+
+/* ---------- Páginas interiores: el contenido va en la tarjeta ----------
+   Mismo papel con filete que la invitación de Inicio, para que toda la
+   web se lea como una sola pieza de papelería. */
+main > .wrap{
+  background: var(--surface);
+  padding: 12px;
+}
+main > .wrap > .section{
+  border: 1px solid var(--line);
+  padding: clamp(40px, 7vw, 80px) clamp(20px, 5vw, 64px);
+}
+.site-header{ text-align: center; padding: var(--s4) 0 0; }
+
+/* ---------- Inicio: la invitación ---------- */
+main.home{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(40px, 6vw, 64px);
+  padding: clamp(24px, 5vw, 64px) 16px clamp(48px, 8vw, 96px);
+}
+.invite{
+  width: min(760px, 100%);
+  background: var(--surface);
+  padding: clamp(10px, 2vw, 18px);
+}
+.invite-inner{
+  border: 1px solid var(--accent);
+  padding: clamp(40px, 7vw, 72px) clamp(20px, 7vw, 80px) clamp(44px, 7vw, 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(18px, 2.4vw, 28px);
+  text-align: center;
+}
+.invite-arch{
+  width: clamp(210px, 40vw, 300px);
+  aspect-ratio: 300 / 380;
+  border-radius: 999px 999px 0 0;
+  overflow: hidden;
+}
+.invite-arch img{ width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.invite-kicker{
+  margin: 12px 0 0;
+  font-size: 12px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  line-height: 1.8;
+  max-width: 30ch;
+}
+.invite-names{
+  margin: 0;
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: clamp(50px, 13vw, 96px);
+  line-height: 1.05;
+  text-wrap: balance;
+  color: var(--ink);
+}
+.invite-names .amp{ font-size: .64em; }
+.invite-date{
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 3vw, 28px);
+  font-family: var(--display);
+  font-size: clamp(17px, 2.4vw, 26px);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.invite-date .rule{ width: 1px; height: clamp(46px, 7vw, 64px); background: var(--accent); }
+.invite-date .day{ font-size: clamp(50px, 7vw, 72px); letter-spacing: 0; line-height: 1; }
+.invite-year{ margin: 0; font-family: var(--display); font-size: clamp(20px, 2.4vw, 26px); letter-spacing: .25em; }
+.invite-events{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  margin-top: 8px;
+  border-top: 1px solid var(--line);
+}
+.invite-event{ display: flex; flex-direction: column; gap: 4px; padding: 26px 12px 0; }
+.invite-event + .invite-event{ border-left: 1px solid var(--line); }
+.event-label{ font-size: 12px; letter-spacing: .25em; text-transform: uppercase; color: var(--accent); }
+.event-place{ font-family: var(--display); font-size: clamp(23px, 2.4vw, 28px); line-height: 1.2; }
+.invite-event a{ font-size: 14px; text-decoration: underline; text-underline-offset: 4px; padding: 10px 0; align-self: center; }
+.invite-event a:hover{ color: var(--accent); }
+.invite .btn{ margin-top: 12px; }
+
+main.home .countdown{
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: clamp(22px, 5vw, 48px);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: auto;
+}
+main.home .countdown-item b{ font-weight: 400; font-size: clamp(40px, 6vw, 64px); color: var(--ink); line-height: 1; }
+main.home .countdown-item span{ font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); }
+.home-welcome{
+  margin: 0;
+  max-width: 640px;
+  text-align: center;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(21px, 2.6vw, 28px);
+  line-height: 1.45;
+}
+.home-dress{ margin: 0; font-size: 12.5px; letter-spacing: .16em; text-transform: uppercase; }
+.home-dress a{ color: var(--accent); border-bottom: 1px solid currentColor; }
+
 /* ---------- Footer ---------- */
 .site-footer{
-  padding: var(--s5) 0 var(--s4);
+  padding: var(--s5) 16px var(--s5);
   text-align: center;
+  border-top: 1px solid var(--line);
+}
+.footer-names{ margin: 0; font-family: var(--script); font-size: 44px; line-height: 1.1; }
+.footer-date{ margin: 6px 0 var(--s3); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); }
+.footer-cta{ font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); border-bottom: 1px solid currentColor; padding: 8px 0; }
+
+@media (max-width: 560px){
+  .invite-events{ grid-template-columns: 1fr; }
+  .invite-event + .invite-event{ border-left: 0; border-top: 1px solid var(--line); margin-top: 20px; }
+  main.home .countdown-item:last-child{ display: none; }
 }
 
 /* ---------- Reveal on scroll ---------- */
@@ -664,16 +762,6 @@ form.stack{
   .countdown-item{ min-width: 56px; }
   .gallery-2{ grid-template-columns: 1fr; }
   form.stack{ max-width: 100%; }
-  .site-header--photo{ background-attachment: scroll; }
-  /* fixed + scroll de Safari iOS repinta mal, así que aquí va `scroll` —
-     pero con `cover` eso estira la imagen a la altura de TODA la página
-     (móvil es una columna larga) y la deja casi invisible. Tamaño fijo
-     anclado arriba en su lugar: sigue siendo una sola imagen, sin repetir. */
-  body.page-home{
-    background-attachment: scroll;
-    background-size: auto, 640px auto;
-    background-position: center, center -40px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -683,10 +771,8 @@ form.stack{
 
 /* ============================================================
    Imágenes:
-   - assets/images/pareja-hero.webp      → foto real de Eduardo y Cora
-     (aportada por el cliente 1-sep-2026), panel de Inicio.
-   - assets/images/placeholder-hero.webp → Unsplash, foto
-     1508717272800-9fff97da7e8f (licencia libre). Ambientación de flores
-     en la franja del header y fondo de Inicio — una sola instancia, sin
-     repetir (corregido 1-sep-2026, se veía en mosaico y quedaba mal).
+   - assets/images/pareja-hero.webp → foto real de Eduardo y Cora
+     (aportada por el cliente 1-sep-2026), arco de la invitación de Inicio.
+   (La foto de flores de Unsplash que hacía de fondo se retiró el
+   24-sep-2026 con el rediseño: era un relleno, no de la pareja.)
    ============================================================ */
