@@ -1,3 +1,7 @@
+# Calendario de la boda: sin esto Hostinger lo sirve como text/plain y el
+# iPhone lo enseña como texto en vez de ofrecer añadirlo (24-sep-2026)
+AddType text/calendar .ics
+
 Options -Indexes
 
 <IfModule mod_headers.c>
