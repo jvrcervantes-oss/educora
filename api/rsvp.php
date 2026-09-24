@@ -14,10 +14,9 @@ if (clean_str($_POST['web'] ?? '') !== '') {
 
 $nombre = clean_str($_POST['nombre'] ?? '', 120);
 $acompanantes = clean_str($_POST['acompanantes'] ?? '', 600);
-$consienteAcompanantes = ($_POST['consiente_acompanantes'] ?? '') === 'si';
 $asisteCeremonia = ($_POST['asiste_ceremonia'] ?? '') === 'si';
 $asisteBanquete = ($_POST['asiste_banquete'] ?? '') === 'si';
-$menu = clean_str($_POST['menu'] ?? 'normal', 20);
+$menu = clean_str($_POST['menu'] ?? 'carne', 20);
 $necesitaBus = ($_POST['necesita_bus'] ?? '') === 'si';
 $alergias = clean_str($_POST['alergias'] ?? '', 300);
 $contacto = clean_str($_POST['contacto'] ?? '', 120);
@@ -36,11 +35,8 @@ if ($esEmail && !filter_var($contacto, FILTER_VALIDATE_EMAIL)) {
 if (!$esEmail && !preg_match('/^[0-9+\s()-]{6,20}$/', $contacto)) {
     json_response(['ok' => false, 'error' => 'El teléfono no parece válido.']);
 }
-if ($acompanantes !== '' && !$consienteAcompanantes) {
-    json_response(['ok' => false, 'error' => 'Falta marcar el consentimiento para compartir los datos de tus acompañantes.']);
-}
-if (!in_array($menu, ['normal', 'vegetariano', 'infantil'], true)) {
-    $menu = 'normal';
+if (!in_array($menu, ['carne', 'pescado', 'vegetariano', 'infantil'], true)) {
+    $menu = 'carne';
 }
 
 $record = [
@@ -48,7 +44,6 @@ $record = [
     'fecha_envio' => date('c'),
     'nombre' => $nombre,
     'acompanantes' => $acompanantes,
-    'consiente_acompanantes' => $consienteAcompanantes,
     'asiste_ceremonia' => $asisteCeremonia,
     'asiste_banquete' => $asisteBanquete,
     'menu' => $menu,

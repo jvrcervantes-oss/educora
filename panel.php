@@ -13,7 +13,8 @@ $totalRespuestas = count($rsvps);
 $vanCeremonia = count(array_filter($rsvps, fn($r) => !empty($r['asiste_ceremonia'])));
 $vanBanquete = count(array_filter($rsvps, fn($r) => !empty($r['asiste_banquete'])));
 $necesitanBus = count(array_filter($rsvps, fn($r) => !empty($r['necesita_bus'])));
-$menus = ['normal' => 0, 'vegetariano' => 0, 'infantil' => 0];
+// 'normal' = menú de antes del 24-sep (Carne/Pescado aún no existían): se sigue contando
+$menus = ['carne' => 0, 'pescado' => 0, 'vegetariano' => 0, 'infantil' => 0, 'normal' => 0];
 foreach ($rsvps as $r) {
     $m = $r['menu'] ?? 'normal';
     if (isset($menus[$m])) $menus[$m]++;
@@ -60,7 +61,7 @@ if (($_GET['export'] ?? '') === 'csv') {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Panel privado — Eduardo &amp; Cora</title>
 <meta name="robots" content="noindex, nofollow">
-<link rel="stylesheet" href="styles.css?v=3f0ab161">
+<link rel="stylesheet" href="styles.css?v=a1e50487">
 <style>
   table{ width:100%; border-collapse:collapse; font-size:14px; }
   th,td{ text-align:left; padding:10px 12px; border-bottom:1px solid #E5E5E5; vertical-align:top; }
@@ -89,9 +90,11 @@ if (($_GET['export'] ?? '') === 'csv') {
         <div class="stat"><b><?= $vanCeremonia ?></b><span>van a ceremonia</span></div>
         <div class="stat"><b><?= $vanBanquete ?></b><span>van a banquete</span></div>
         <div class="stat"><b><?= $necesitanBus ?></b><span>necesitan bus</span></div>
-        <div class="stat"><b><?= $menus['normal'] ?></b><span>menú normal</span></div>
+        <div class="stat"><b><?= $menus['carne'] ?></b><span>carne</span></div>
+        <div class="stat"><b><?= $menus['pescado'] ?></b><span>pescado</span></div>
         <div class="stat"><b><?= $menus['vegetariano'] ?></b><span>vegetariano</span></div>
         <div class="stat"><b><?= $menus['infantil'] ?></b><span>infantil</span></div>
+        <?php if ($menus['normal']): ?><div class="stat"><b><?= $menus['normal'] ?></b><span>normal (antiguo)</span></div><?php endif; ?>
       </div>
     </section>
 

@@ -49,6 +49,24 @@
     });
   }
 
+  // ---------- "Por ver a Máximo": si la desmarcas, se vuelve a marcar ----------
+  function initMaximo() {
+    var box = document.getElementById('porMaximo');
+    var msg = document.getElementById('maximoMsg');
+    if (!box) return;
+    box.addEventListener('change', function () {
+      if (box.checked) return;
+      box.checked = true;
+      if (msg) msg.hidden = false;
+      var label = box.closest('label');
+      if (label) {
+        label.classList.remove('nope');
+        void label.offsetWidth; // reinicia la animación si se insiste
+        label.classList.add('nope');
+      }
+    });
+  }
+
   // ---------- Añadir al calendario ----------
   function initCalendar() {
     var btn = document.getElementById('calBtn');
@@ -298,6 +316,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     initNav();
     initCalendar();
+    initMaximo();
     initReveal();
     initCountdown();
     initTabs();

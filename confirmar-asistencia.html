@@ -7,7 +7,7 @@
 <meta name="description" content="Confirma tu asistencia a la boda de Eduardo y Cora, el 1 de mayo de 2027.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="confirmar-asistencia">
-<link rel="stylesheet" href="styles.css?v=3f0ab161">
+<link rel="stylesheet" href="styles.css?v=a1e50487">
 </head>
 <body>
 
@@ -78,26 +78,23 @@
         </div>
 
         <div class="field">
-          <label class="check-group" style="text-transform:none;font-weight:400;">
-            <input type="checkbox" id="rsvpConsentAcomp" name="consiente_acompanantes" value="si">
-            Declaro que cuento con el consentimiento de mis acompañantes para compartir sus datos, incluida su alergia o intolerancia.
-          </label>
-        </div>
-
-        <div class="field">
           <label>¿A qué asistes?</label>
           <div class="check-group">
             <label><input type="checkbox" name="asiste_ceremonia" value="si" checked> Ceremonia</label>
             <label><input type="checkbox" name="asiste_banquete" value="si" checked> Banquete</label>
+            <label><input type="checkbox" id="porMaximo" checked> Por ver a Máximo</label>
           </div>
+          <p class="maximo-msg" id="maximoMsg" aria-live="polite" hidden>Esa no se desmarca. Todos venimos por Máximo.</p>
         </div>
 
         <div class="field">
           <label>Menú</label>
           <div class="radio-group">
-            <label><input type="radio" name="menu" value="normal" checked> Normal</label>
+            <label><input type="radio" name="menu" value="carne" checked> Carne</label>
+            <label><input type="radio" name="menu" value="pescado"> Pescado</label>
             <label><input type="radio" name="menu" value="vegetariano"> Vegetariano</label>
             <label><input type="radio" name="menu" value="infantil"> Infantil</label>
+            <label class="is-disabled" title="Ya nos gustaría"><input type="radio" value="mcdonalds" disabled> McDonald's</label>
           </div>
         </div>
 
@@ -147,6 +144,6 @@
   <p class="kicker">Eduardo &amp; Cora · 01 · 05 · 2027 · Murcia</p>
 </footer>
 
-<script src="assets/js/main.js?v=be83905e" defer></script>
+<script src="assets/js/main.js?v=55aa6616" defer></script>
 </body>
 </html>

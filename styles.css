@@ -591,6 +591,10 @@ form.stack{ max-width: 460px; margin: 0 auto; display: flex; flex-direction: col
   cursor: pointer;
 }
 .check-group input, .radio-group input{ width: 20px; height: 20px; accent-color: var(--accent); }
+.radio-group label.is-disabled{ opacity: .45; cursor: not-allowed; text-decoration: line-through; }
+.radio-group label.is-disabled input{ cursor: not-allowed; }
+.check-group label.nope{ animation: shake .5s; }
+.maximo-msg{ margin: 4px 0 0; font-size: 13px; font-style: italic; color: var(--accent); }
 .form-msg{ text-align: center; color: var(--error); font-size: 13px; min-height: 20px; }
 .form-actions{ text-align: center; margin-top: 4px; }
 
