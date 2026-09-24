@@ -311,7 +311,7 @@
       onSuccess: function () {
         if (musicMsg) {
           musicMsg.style.color = 'var(--accent)';
-          musicMsg.textContent = '¡Gracias! Vuestra propuesta ya está en la lista.';
+          musicMsg.textContent = '¡Temazo añadido! Ya está en la lista.';
         }
         location.reload();
       }

@@ -62,7 +62,7 @@
     <section class="section rv">
       <h1>Confirma tu asistencia</h1>
       <hr class="divider">
-      <p class="lede">Podéis utilizar este formulario para confirmar vuestra asistencia a la boda. Si confirmáis para varios invitados, indicad los nombres de todos los que asistirán. No hay fecha límite, pero cuanto antes confirméis, antes podremos organizarlo todo.</p>
+      <p class="lede">Rellenad esto y quedáis oficialmente apuntados a la fiesta. Si venís varios, poned los nombres de todos: aquí no se cuela nadie sin plato. No hay fecha límite, pero cuanto antes confirméis, antes dejamos de hacer cuentas con los dedos.</p>
 
       <form id="rsvpForm" class="stack" novalidate>
         <input type="text" name="web" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
@@ -74,7 +74,7 @@
 
         <div class="field">
           <label for="rsvpAcompanantes">Nombres de tus acompañantes (si vienes con más gente)</label>
-          <textarea id="rsvpAcompanantes" name="acompanantes" placeholder="Uno por línea"></textarea>
+          <textarea id="rsvpAcompanantes" name="acompanantes" placeholder="Uno por línea (sí, tu pareja también cuenta)"></textarea>
         </div>
 
         <div class="field">
@@ -104,20 +104,13 @@
         <div class="field">
           <label class="check-group" style="text-transform:none;font-weight:400;">
             <input type="checkbox" name="necesita_bus" value="si">
-            Necesito autobús (la información de horarios y paradas se publicará más adelante)
+            Necesito autobús: yo he venido a brindar, no a conducir (horarios y paradas, más adelante)
           </label>
         </div>
 
         <div class="field">
           <label for="rsvpAlergias">Alergias o intolerancias alimentarias</label>
-          <textarea id="rsvpAlergias" name="alergias" placeholder="Déjalo en blanco si no aplica"></textarea>
-        </div>
-
-        <div class="field">
-          <label class="check-group" style="text-transform:none;font-weight:400;">
-            <input type="checkbox" id="rsvpConsentSalud" name="consiente_salud" value="si">
-            Doy mi consentimiento explícito para tratar este dato de salud, con la única finalidad de organizar el menú.
-          </label>
+          <textarea id="rsvpAlergias" name="alergias" placeholder="Si el marisco y tú no os lleváis bien, este es el sitio. Si comes de todo, déjalo en blanco"></textarea>
         </div>
 
         <div class="field">
@@ -126,20 +119,14 @@
         </div>
 
         <div class="field">
-          <label for="rsvpCancion">Una canción que no puede faltar (opcional)</label>
+          <label for="rsvpCancion">La canción que te hará saltar a la pista (opcional)</label>
           <input type="text" id="rsvpCancion" name="cancion">
         </div>
 
         <div class="form-actions">
-          <button type="submit" class="btn">Enviar confirmación</button>
+          <button type="submit" class="btn">¡Allí estaré!</button>
         </div>
         <div class="form-msg" role="alert"></div>
-
-        <p style="font-size:13px;color:var(--ink-soft);text-align:center;line-height:1.6;">
-          Responsable: Eduardo y Cora. Finalidad: organizar la asistencia, el menú y el transporte de la boda.
-          Estos datos se conservarán hasta unos 4 meses después de la boda y después se eliminarán.
-          Para consultar, corregir o borrar tus datos, contacta directamente con Eduardo o Cora.
-        </p>
       </form>
     </section>
   </div>
@@ -147,19 +134,19 @@
 
 <div class="modal-overlay" id="rsvpSuccessModal">
   <div class="modal">
-    <h2>Confirmación enviada</h2>
-    <p>Gracias — hemos recibido vuestra confirmación correctamente.</p>
-    <button type="button" class="btn" data-close-modal>Cerrar</button>
+    <h2>¡Apuntado!</h2>
+    <p>Ya no hay marcha atrás. Nos vemos el 1 de mayo; id calentando.</p>
+    <button type="button" class="btn" data-close-modal>¡Hecho!</button>
   </div>
 </div>
 
 <footer class="site-footer">
   <div class="footer-mono" aria-hidden="true"><span class="rule"></span><span>E &amp; C</span><span class="rule"></span></div>
-  <p class="footer-thanks">Gracias por formar parte de nuestra historia.</p>
+  <p class="footer-thanks">Gracias por formar parte de nuestra historia. Traed ganas de bailar.</p>
   <a class="btn" href="confirmar-asistencia">Confirmar asistencia</a>
   <p class="kicker">Eduardo &amp; Cora · 01 · 05 · 2027 · Murcia</p>
 </footer>
 
-<script src="assets/js/main.js?v=a010af6a" defer></script>
+<script src="assets/js/main.js?v=be83905e" defer></script>
 </body>
 </html>

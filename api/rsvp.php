@@ -20,7 +20,6 @@ $asisteBanquete = ($_POST['asiste_banquete'] ?? '') === 'si';
 $menu = clean_str($_POST['menu'] ?? 'normal', 20);
 $necesitaBus = ($_POST['necesita_bus'] ?? '') === 'si';
 $alergias = clean_str($_POST['alergias'] ?? '', 300);
-$consienteSalud = ($_POST['consiente_salud'] ?? '') === 'si';
 $contacto = clean_str($_POST['contacto'] ?? '', 120);
 $cancion = clean_str($_POST['cancion'] ?? '', 150);
 
@@ -40,9 +39,6 @@ if (!$esEmail && !preg_match('/^[0-9+\s()-]{6,20}$/', $contacto)) {
 if ($acompanantes !== '' && !$consienteAcompanantes) {
     json_response(['ok' => false, 'error' => 'Falta marcar el consentimiento para compartir los datos de tus acompañantes.']);
 }
-if ($alergias !== '' && !$consienteSalud) {
-    json_response(['ok' => false, 'error' => 'Falta marcar el consentimiento para tratar el dato de alergias.']);
-}
 if (!in_array($menu, ['normal', 'vegetariano', 'infantil'], true)) {
     $menu = 'normal';
 }
@@ -58,7 +54,6 @@ $record = [
     'menu' => $menu,
     'necesita_bus' => $necesitaBus,
     'alergias' => $alergias,
-    'consiente_salud' => $consienteSalud,
     'contacto' => $contacto,
     'cancion' => $cancion,
 ];
