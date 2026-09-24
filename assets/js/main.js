@@ -49,6 +49,70 @@
     });
   }
 
+  // ---------- Confirmación por grupo: una ficha por persona ----------
+  // La ficha 0 ("Tú") está en el HTML; el resto se clona de #guestTpl. Los `name`
+  // se renumeran (invitados[i][campo]) al añadir o quitar; los `id` salen de un
+  // contador que nunca se reutiliza, así un label nunca apunta a otra ficha.
+  function initGuests() {
+    var list = document.getElementById('guestList');
+    var tpl = document.getElementById('guestTpl');
+    var form = document.getElementById('rsvpForm');
+    if (!list || !tpl || !form) return;
+    var submit = document.getElementById('rsvpSubmit');
+    var uid = 1;
+    var MAX = 15;
+    var counters = { adulto: 0, nino: 0 };
+
+    function renumber() {
+      var cards = list.querySelectorAll('.guest');
+      var n = { adulto: 0, nino: 0 };
+      cards.forEach(function (card, i) {
+        card.querySelectorAll('[data-f]').forEach(function (el) {
+          el.name = 'invitados[' + i + '][' + el.getAttribute('data-f') + ']';
+        });
+        if (i === 0) return;
+        var kind = card.getAttribute('data-kind');
+        n[kind]++;
+        card.querySelector('.guest-tag').textContent = (kind === 'nino' ? 'Niño/a ' : 'Adulto ') + n[kind];
+      });
+      if (submit) submit.textContent = cards.length > 1 ? '¡Allí estaremos!' : '¡Allí estaré!';
+      document.querySelectorAll('[data-add-guest]').forEach(function (b) { b.disabled = cards.length >= MAX; });
+    }
+
+    function add(kind) {
+      if (list.querySelectorAll('.guest').length >= MAX) return;
+      var card = tpl.content.firstElementChild.cloneNode(true);
+      var id = 'g' + (uid++);
+      card.setAttribute('data-kind', kind);
+      card.querySelector('[data-f="tipo"]').value = kind;
+      card.querySelectorAll('[data-id]').forEach(function (el) { el.id = id + '-' + el.getAttribute('data-id'); });
+      card.querySelectorAll('[data-for]').forEach(function (el) { el.htmlFor = id + '-' + el.getAttribute('data-for'); });
+      var def = card.querySelector('[data-f="menu"][value="' + (kind === 'nino' ? 'infantil' : 'carne') + '"]');
+      if (def) { def.checked = true; def.defaultChecked = true; }
+      card.querySelector('.guest-remove').addEventListener('click', function () {
+        card.remove();
+        renumber();
+        var last = list.querySelectorAll('.guest');
+        last[last.length - 1].querySelector('[data-f="nombre"]').focus();
+      });
+      list.appendChild(card);
+      renumber();
+      card.querySelector('[data-f="nombre"]').focus();
+    }
+
+    document.querySelectorAll('[data-add-guest]').forEach(function (b) {
+      b.addEventListener('click', function () { add(b.getAttribute('data-add-guest')); });
+    });
+    // Tras enviar, form.reset() dispara 'reset': se quitan las fichas añadidas
+    form.addEventListener('reset', function () {
+      setTimeout(function () {
+        list.querySelectorAll('.guest').forEach(function (c, i) { if (i > 0) c.remove(); });
+        renumber();
+      }, 0);
+    });
+    renumber();
+  }
+
   // ---------- "Por ver a Máximo": si la desmarcas, se vuelve a marcar ----------
   function initMaximo() {
     var box = document.getElementById('porMaximo');
@@ -317,13 +381,18 @@
     initNav();
     initCalendar();
     initMaximo();
+    initGuests();
     initReveal();
     initCountdown();
     initTabs();
     loadSongList();
 
     var rsvpModal = initModal('rsvpSuccessModal');
-    initAjaxForm('rsvpForm', 'api/rsvp.php', { onSuccess: function () { rsvpModal.open(); } });
+    initAjaxForm('rsvpForm', 'api/rsvp.php', { onSuccess: function (json) {
+      var h = document.querySelector('#rsvpSuccessModal h2');
+      if (h) h.textContent = json && json.personas > 1 ? '¡Apuntados los ' + json.personas + '!' : '¡Apuntado!';
+      rsvpModal.open();
+    } });
 
     var musicMsg = document.getElementById('musicAddMsg');
     initAjaxForm('musicForm', 'api/musica.php', {

@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Panel privado — Eduardo &amp; Cora</title>
 <meta name="robots" content="noindex, nofollow">
-<link rel="stylesheet" href="styles.css?v=a1e50487">
+<link rel="stylesheet" href="styles.css?v=61b5f948">
 </head>
 <body>
 <main>

@@ -7,7 +7,7 @@
 <meta name="description" content="Confirma tu asistencia a la boda de Eduardo y Cora, el 1 de mayo de 2027.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="confirmar-asistencia">
-<link rel="stylesheet" href="styles.css?v=a1e50487">
+<link rel="stylesheet" href="styles.css?v=61b5f948">
 </head>
 <body>
 
@@ -62,52 +62,86 @@
     <section class="section rv">
       <h1>Confirma tu asistencia</h1>
       <hr class="divider">
-      <p class="lede">Rellenad esto y quedáis oficialmente apuntados a la fiesta. Si venís varios, poned los nombres de todos: aquí no se cuela nadie sin plato. No hay fecha límite, pero cuanto antes confirméis, antes dejamos de hacer cuentas con los dedos.</p>
+      <p class="lede">Rellenad esto y quedáis oficialmente apuntados a la fiesta. Si venís en familia o en grupo, basta con que uno lo rellene por todos: aquí no se cuela nadie sin plato. No hay fecha límite, pero cuanto antes confirméis, antes dejamos de hacer cuentas con los dedos.</p>
 
       <form id="rsvpForm" class="stack" novalidate>
         <input type="text" name="web" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
 
-        <div class="field">
-          <label for="rsvpNombre">Tu nombre</label>
-          <input type="text" id="rsvpNombre" name="nombre" required>
+        <div class="guests-head">
+          <span class="kicker">Quiénes venís</span>
+          <p class="guests-hint">Uno confirma por todos: añadid a cada adulto y a cada peque con su menú.</p>
         </div>
 
-        <div class="field">
-          <label for="rsvpAcompanantes">Nombres de tus acompañantes (si vienes con más gente)</label>
-          <textarea id="rsvpAcompanantes" name="acompanantes" placeholder="Uno por línea (sí, tu pareja también cuenta)"></textarea>
+        <div class="guest-list" id="guestList">
+          <fieldset class="guest" data-kind="adulto">
+            <legend class="guest-head"><span class="guest-tag">Tú</span></legend>
+            <input type="hidden" data-f="tipo" name="invitados[0][tipo]" value="adulto">
+            <div class="field">
+              <label for="g0-nombre">Nombre</label>
+              <input type="text" id="g0-nombre" data-f="nombre" name="invitados[0][nombre]" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <span class="field-label">Menú</span>
+              <div class="radio-group">
+                <label><input type="radio" data-f="menu" name="invitados[0][menu]" value="carne" checked> Carne</label>
+                <label><input type="radio" data-f="menu" name="invitados[0][menu]" value="pescado"> Pescado</label>
+                <label><input type="radio" data-f="menu" name="invitados[0][menu]" value="vegetariano"> Vegetariano</label>
+                <label><input type="radio" data-f="menu" name="invitados[0][menu]" value="infantil"> Infantil</label>
+                <label class="is-disabled" title="Ya nos gustaría"><input type="radio" value="mcdonalds" disabled> McDonald's</label>
+              </div>
+            </div>
+            <div class="field">
+              <label for="g0-alergias">Alergias o intolerancias</label>
+              <input type="text" id="g0-alergias" data-f="alergias" name="invitados[0][alergias]" placeholder="Si el marisco y tú no os lleváis bien, dilo aquí">
+            </div>
+          </fieldset>
         </div>
 
+        <div class="guest-add">
+          <button type="button" class="btn btn-add" data-add-guest="adulto"><span aria-hidden="true">+</span> Añadir adulto</button>
+          <button type="button" class="btn btn-add" data-add-guest="nino"><span aria-hidden="true">+</span> Añadir niño/a</button>
+        </div>
+
+        <template id="guestTpl">
+          <fieldset class="guest">
+            <legend class="guest-head"><span class="guest-tag"></span><button type="button" class="guest-remove" aria-label="Quitar a esta persona">Quitar</button></legend>
+            <input type="hidden" data-f="tipo" value="adulto">
+            <div class="field">
+              <label data-for="nombre">Nombre</label>
+              <input type="text" data-f="nombre" data-id="nombre" autocomplete="off" required>
+            </div>
+            <div class="field">
+              <span class="field-label">Menú</span>
+              <div class="radio-group">
+                <label><input type="radio" data-f="menu" value="carne"> Carne</label>
+                <label><input type="radio" data-f="menu" value="pescado"> Pescado</label>
+                <label><input type="radio" data-f="menu" value="vegetariano"> Vegetariano</label>
+                <label><input type="radio" data-f="menu" value="infantil"> Infantil</label>
+              </div>
+            </div>
+            <div class="field">
+              <label data-for="alergias">Alergias o intolerancias</label>
+              <input type="text" data-f="alergias" data-id="alergias" placeholder="Déjalo en blanco si come de todo">
+            </div>
+          </fieldset>
+        </template>
+
         <div class="field">
-          <label>¿A qué asistes?</label>
+          <span class="field-label">¿A qué asistís?</span>
           <div class="check-group">
             <label><input type="checkbox" name="asiste_ceremonia" value="si" checked> Ceremonia</label>
             <label><input type="checkbox" name="asiste_banquete" value="si" checked> Banquete</label>
             <label><input type="checkbox" id="porMaximo" checked> Por ver a Máximo</label>
           </div>
           <p class="maximo-msg" id="maximoMsg" aria-live="polite" hidden>Esa no se desmarca. Todos venimos por Máximo.</p>
-        </div>
-
-        <div class="field">
-          <label>Menú</label>
-          <div class="radio-group">
-            <label><input type="radio" name="menu" value="carne" checked> Carne</label>
-            <label><input type="radio" name="menu" value="pescado"> Pescado</label>
-            <label><input type="radio" name="menu" value="vegetariano"> Vegetariano</label>
-            <label><input type="radio" name="menu" value="infantil"> Infantil</label>
-            <label class="is-disabled" title="Ya nos gustaría"><input type="radio" value="mcdonalds" disabled> McDonald's</label>
-          </div>
+          <p class="guests-note">Vale para todo el grupo. Si alguien no va a todo, que confirme por su cuenta.</p>
         </div>
 
         <div class="field">
           <label class="check-group" style="text-transform:none;font-weight:400;">
             <input type="checkbox" name="necesita_bus" value="si">
-            Necesito autobús: yo he venido a brindar, no a conducir (horarios y paradas, más adelante)
+            Necesitamos autobús: hemos venido a brindar, no a conducir (horarios y paradas, más adelante)
           </label>
-        </div>
-
-        <div class="field">
-          <label for="rsvpAlergias">Alergias o intolerancias alimentarias</label>
-          <textarea id="rsvpAlergias" name="alergias" placeholder="Si el marisco y tú no os lleváis bien, este es el sitio. Si comes de todo, déjalo en blanco"></textarea>
         </div>
 
         <div class="field">
@@ -116,12 +150,12 @@
         </div>
 
         <div class="field">
-          <label for="rsvpCancion">La canción que te hará saltar a la pista (opcional)</label>
+          <label for="rsvpCancion">La canción que os hará saltar a la pista (opcional)</label>
           <input type="text" id="rsvpCancion" name="cancion">
         </div>
 
         <div class="form-actions">
-          <button type="submit" class="btn">¡Allí estaré!</button>
+          <button type="submit" class="btn" id="rsvpSubmit">¡Allí estaré!</button>
         </div>
         <div class="form-msg" role="alert"></div>
       </form>
@@ -144,6 +178,6 @@
   <p class="kicker">Eduardo &amp; Cora · 01 · 05 · 2027 · Murcia</p>
 </footer>
 
-<script src="assets/js/main.js?v=55aa6616" defer></script>
+<script src="assets/js/main.js?v=aaa6b8d3" defer></script>
 </body>
 </html>

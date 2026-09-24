@@ -12,19 +12,54 @@ if (clean_str($_POST['web'] ?? '') !== '') {
     json_response(['ok' => true]);
 }
 
-$nombre = clean_str($_POST['nombre'] ?? '', 120);
-$acompanantes = clean_str($_POST['acompanantes'] ?? '', 600);
-$asisteCeremonia = ($_POST['asiste_ceremonia'] ?? '') === 'si';
-$asisteBanquete = ($_POST['asiste_banquete'] ?? '') === 'si';
-$menu = clean_str($_POST['menu'] ?? 'carne', 20);
-$necesitaBus = ($_POST['necesita_bus'] ?? '') === 'si';
-$alergias = clean_str($_POST['alergias'] ?? '', 300);
-$contacto = clean_str($_POST['contacto'] ?? '', 120);
-$cancion = clean_str($_POST['cancion'] ?? '', 150);
+const MENUS = ['carne', 'pescado', 'vegetariano', 'infantil'];
+const MAX_INVITADOS = 15;
 
-if ($nombre === '') {
+// Una persona confirma por todo su grupo (24-sep-2026): llega invitados[i][nombre|tipo|menu|alergias].
+// El registro guarda SOLO `invitados` — nada derivado (nombre/acompanantes/menu sueltos) que
+// pueda contradecirlo. panel.php lee también los registros viejos, de antes de este cambio.
+$raw = $_POST['invitados'] ?? null;
+$invitados = [];
+if (is_array($raw)) {
+    foreach (array_slice(array_values($raw), 0, MAX_INVITADOS) as $g) {
+        if (!is_array($g)) continue;
+        $nombre = clean_str($g['nombre'] ?? '', 120);
+        if ($nombre === '') {
+            json_response(['ok' => false, 'error' => 'Falta el nombre de alguno de los invitados.']);
+        }
+        $tipo = ($g['tipo'] ?? '') === 'nino' ? 'nino' : 'adulto';
+        $menu = clean_str($g['menu'] ?? '', 20);
+        if (!in_array($menu, MENUS, true)) $menu = $tipo === 'nino' ? 'infantil' : 'carne';
+        $invitados[] = [
+            'nombre' => $nombre,
+            'tipo' => $tipo,
+            'menu' => $menu,
+            'alergias' => clean_str($g['alergias'] ?? '', 300),
+        ];
+    }
+} else {
+    // Formulario anterior (HTML en caché de algún navegador): nombre + acompanantes + menu.
+    // Se reconstruye para no perder la confirmación; los acompañantes, sin menú conocido.
+    $nombre = clean_str($_POST['nombre'] ?? '', 120);
+    if ($nombre !== '') {
+        $menu = clean_str($_POST['menu'] ?? '', 20);
+        $invitados[] = ['nombre' => $nombre, 'tipo' => 'adulto',
+            'menu' => in_array($menu, MENUS, true) ? $menu : '',
+            'alergias' => clean_str($_POST['alergias'] ?? '', 300)];
+        foreach (preg_split('/\n+/', clean_str($_POST['acompanantes'] ?? '', 600)) as $a) {
+            $a = trim($a);
+            if ($a !== '' && count($invitados) < MAX_INVITADOS) {
+                $invitados[] = ['nombre' => clean_str($a, 120), 'tipo' => '', 'menu' => '', 'alergias' => ''];
+            }
+        }
+    }
+}
+
+if (!$invitados) {
     json_response(['ok' => false, 'error' => 'Falta el nombre.']);
 }
+
+$contacto = clean_str($_POST['contacto'] ?? '', 120);
 if ($contacto === '') {
     json_response(['ok' => false, 'error' => 'Falta un teléfono o email de contacto.']);
 }
@@ -35,22 +70,16 @@ if ($esEmail && !filter_var($contacto, FILTER_VALIDATE_EMAIL)) {
 if (!$esEmail && !preg_match('/^[0-9+\s()-]{6,20}$/', $contacto)) {
     json_response(['ok' => false, 'error' => 'El teléfono no parece válido.']);
 }
-if (!in_array($menu, ['carne', 'pescado', 'vegetariano', 'infantil'], true)) {
-    $menu = 'carne';
-}
 
 $record = [
     'id' => bin2hex(random_bytes(8)),
     'fecha_envio' => date('c'),
-    'nombre' => $nombre,
-    'acompanantes' => $acompanantes,
-    'asiste_ceremonia' => $asisteCeremonia,
-    'asiste_banquete' => $asisteBanquete,
-    'menu' => $menu,
-    'necesita_bus' => $necesitaBus,
-    'alergias' => $alergias,
+    'invitados' => $invitados,
+    'asiste_ceremonia' => ($_POST['asiste_ceremonia'] ?? '') === 'si',
+    'asiste_banquete' => ($_POST['asiste_banquete'] ?? '') === 'si',
+    'necesita_bus' => ($_POST['necesita_bus'] ?? '') === 'si',
     'contacto' => $contacto,
-    'cancion' => $cancion,
+    'cancion' => clean_str($_POST['cancion'] ?? '', 150),
 ];
 
 $ok = append_record(__DIR__ . '/../guardado/rsvp.json', $record);
@@ -58,4 +87,4 @@ if (!$ok) {
     json_response(['ok' => false, 'error' => 'No se ha podido guardar. Inténtalo de nuevo en un momento.'], 500);
 }
 
-json_response(['ok' => true]);
+json_response(['ok' => true, 'personas' => count($invitados)]);
